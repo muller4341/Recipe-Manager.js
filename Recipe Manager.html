@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #recipe-container {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+        #recipe-container h2 {
+            color: #333;
+        }
+        #recipe-list {
+            list-style: none;
+            padding: 0;
+        }
+        .recipe-item {
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recipe Manager</h1>
+
+    <div id="recipe-container">
+        <h2>Recipes</h2>
+        <ul id="recipe-list">
+            <!-- Recipe items will be displayed here -->
+        </ul>
+    </div>
+
+    <div id="add-recipe-form">
+        <h2>Add a New Recipe</h2>
+        <input type="text" id="recipe-name" placeholder="Recipe Name">
+        <input type="text" id="ingredients" placeholder="Ingredients (comma-separated)">
+        <textarea id="instructions" placeholder="Instructions"></textarea>
+        <button onclick="addRecipe()">Add Recipe</button>
+    </div>
+
+    <script>
+        const recipeList = document.getElementById('recipe-list');
+
+        function addRecipe() {
+            const name = document.getElementById('recipe-name').value;
+            const ingredients = document.getElementById('ingredients').value.split(',');
+            const instructions = document.getElementById('instructions').value.split('\n');
+
+            const recipeItem = document.createElement('li');
+            recipeItem.className = 'recipe-item';
+
+            recipeItem.innerHTML = `<h3>${name}</h3><p><strong>Ingredients:</strong> ${ingredients.join(', ')}</p><p><strong>Instructions:</strong></p><ul>${instructions.map(step => `<li>${step}</li>`).join('')}</ul>`;
+
+            recipeList.appendChild(recipeItem);
+
+            document.getElementById('recipe-name').value = '';
+            document.getElementById('ingredients').value = '';
+            document.getElementById('instructions').value = '';
+        }
+    </script>
+</body>
+</html>
